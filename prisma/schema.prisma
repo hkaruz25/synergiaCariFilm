@@ -8,9 +8,32 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection   
 }
 
-model User {
-  id       String  @id @default(cuid())
-  email    String  @unique
-  name     String
-  password String?
+model user {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  password String
+  username String
+  movies   movies[]
+  history  history[]
+}
+
+model movies {
+  id       Int       @id @default(autoincrement())
+  rating   Int
+  judul    String
+  genre    String
+  tahun    Int
+  sinopsis String
+  user_id  Int
+  user     user      @relation(fields: [user_id], references: [id])
+  history  history[]
+}
+
+model history {
+  id       Int    @id @default(autoincrement())
+  movie_id Int
+  user_id  Int
+  review   Int
+  user     user   @relation(fields: [user_id], references: [id])
+  movie    movies @relation(fields: [movie_id], references: [id])
 }
