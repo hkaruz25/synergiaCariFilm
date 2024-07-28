@@ -3,12 +3,12 @@
 import { prisma } from "@/utils/prisma";
 import bcrypt from "bcrypt";
 
-export async function registerAction(_, formData) {
-  const name = formData.get("name");
+export default async function registerAction(_, formData) {
+  const username = formData.get("name");
   const email = formData.get("email");
   const password = formData.get("password");
 
-  if (!name || !email || !password) {
+  if (!username || !email || !password) {
     return {
       success: "false",
       message: "All fields are required",
@@ -27,7 +27,7 @@ export async function registerAction(_, formData) {
 
     await prisma.user.create({
       data: {
-        name,
+        username,
         email,
         password: hashedPassword,
       },
