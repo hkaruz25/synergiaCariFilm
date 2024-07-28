@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-green-200 min-h-dvh p-4 tracking-tight;
+    /* @apply bg-green-200 min-h-dvh p-4 tracking-tight; */
   }
 }
