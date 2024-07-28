@@ -13,7 +13,7 @@ export async function uploadFile({ key, folder, body }) {
       new PutObjectCommand({
         Bucket: process.env.R2_BUCKET_NAME,
         Key: `${folder}/${key}`,
-        ContentType: body.type, // also u can specify -> "image/png"
+        ContentType: ["image/jpg", "image/jpeg", "image/png"],
         Body: buffer,
       })
     );

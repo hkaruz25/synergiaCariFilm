@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function loginAction(_, formData) {
+export default async function loginAction(_, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -60,5 +60,5 @@ export async function loginAction(_, formData) {
     secure: process.env.NODE_ENV === "production",
   });
 
-  redirect("/dashboard");
+  redirect("/wishlist");
 }

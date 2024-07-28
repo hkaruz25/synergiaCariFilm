@@ -1,17 +1,10 @@
 "use client";
 
-import React from 'react';
-import Modal from 'react-modal';
+import React from "react";
 
-const EventFormModal = ({ isOpen, onRequestClose }) => {
+export default function EventFormModal({ isOpen, onRequestClose }) {
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="Create Event"
-      className="Modal"
-      overlayClassName="Overlay"
-    >
+    <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Create Event" className="Modal" overlayClassName="Overlay">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
         <h2 className="text-2xl font-semibold mb-4">Create an Event</h2>
         <form>
@@ -36,13 +29,15 @@ const EventFormModal = ({ isOpen, onRequestClose }) => {
             <input className="w-full p-2 rounded bg-gray-100 focus:bg-blue-100" type="text" />
           </div>
           <div className="flex justify-end space-x-4">
-            <button type="button" className="px-4 py-2 bg-gray-300 rounded" onClick={onRequestClose}>Cancel</button>
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Create</button>
+            <button type="button" className="px-4 py-2 bg-gray-300 rounded" onClick={onRequestClose}>
+              Cancel
+            </button>
+            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+              Create
+            </button>
           </div>
         </form>
       </div>
     </Modal>
   );
-};
-
-export default EventFormModal;
+}
