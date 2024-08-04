@@ -52,7 +52,7 @@ export default function Page() {
               Register
             </button>
             {state?.success === "false" && <p className="text-red-600">{state?.message}</p>}
-            {state?.success === "true" && <p className="text-green-600">{state?.message}</p>}
+            {state?.success === "true" && <p className="text-green-600">Register success, please login</p>}
           </div>
           <p className="text-white">
             Have an account?{" "}
