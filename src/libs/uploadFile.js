@@ -1,24 +1,27 @@
-import { s3Client } from "@/utils/aws";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "../utils/aws"
+import { PutObjectCommand } from "@aws-sdk/client-s3"
 
 export async function uploadFile({ key, folder, body }) {
-  // 1. Siapin file sesuai format yang diminta oleh AWS/R2
-
-  // convert from file to Buffer
-  const buffer = Buffer.from(await body.arrayBuffer());
-
-  // 2. Send Command (Command untuk upload file)
   try {
-    const fileUpload = await s3Client.send(
-      new PutObjectCommand({
-        Bucket: process.env.R2_BUCKET_NAME,
-        Key: `${folder}/${key}`,
-        ContentType: ["image/jpg", "image/jpeg", "image/png"],
-        Body: buffer,
-      })
-    );
-    console.log(fileUpload, "Upload OK! ✅");
+    // Sanitasi nama file
+    const sanitizedKey = key
+      .replace(/\s+/g, "_")
+      .replace(/[^a-zA-Z0-9._-]/g, "")
+
+    const command = new PutObjectCommand({
+      Bucket: process.env.R2_BUCKETNAME,
+      Key: `${folder}/${sanitizedKey}`,
+      Body: body,
+      ContentType: body.type || "application/octet-stream",
+    })
+
+    await s3Client.send(command)
+
+    // Pastikan URL yang dikembalikan konsisten
+    const fileUrl = `${process.env.R2_PUBLIC_URL}/${process.env.R2_BUCKETNAME}/${folder}/${sanitizedKey}`
+    return fileUrl
   } catch (error) {
-    console.log(error);
+    console.error("Error uploading file:", error)
+    throw new Error("File upload failed")
   }
 }

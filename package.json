@@ -12,16 +12,20 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.609.0",
+    "@aws-sdk/client-s3": "^3.623.0",
     "@prisma/client": "^5.16.1",
     "arctic": "^1.9.1",
     "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
     "next": "15.0.0-canary.63",
+    "nookies": "^2.5.2",
     "react": "19.0.0-rc.0",
-    "react-dom": "19.0.0-rc.0"
+    "react-dom": "19.0.0-rc.0",
+    "react-icons": "^5.2.1"
   },
   "devDependencies": {
+    "@types/node": "22.1.0",
+    "@types/react": "18.3.3",
     "daisyui": "^4.12.10",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-canary.63",
